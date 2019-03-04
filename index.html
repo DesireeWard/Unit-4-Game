@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv=" X-UA-Compatible" content="ie=edge">
+    <title>Planet Resource Guessing Game</title>
+    <link rel="stylesheet" href="./assets/css/reset.css ">
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Orbitron|Roboto" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <H1>Planet Resource Guessing Game</H1>
+
+    <div class="flex-container">
+        <div class="flex-item">
+            <p>It is earth year 3020, faster-than-light (FTL) space travel is a reality, and humanity has either
+                explored and
+                settled, or at least charted, the majority of habitable planets in the local Orion-Cygnus Arm of the
+                Milky Way
+                Galaxy. You have been hired by a mining conglomerate to explore 4 newly-charted planets, take
+                additional
+                resource readings, and retrieve your quota of aetherium (a dense gas that enables the FTL drives).</p>
+
+            <p>Sounds simple, but aetherium is highly reactive and, in large quantities, will go thermonuclear -- if
+                you go over your quota you'll explode!!</p>
+
+            <p>Click on a planet to retrieve the aetherium currently available on that planet. But watch your aetherium
+                counter and don't go over the
+                quota! </p>
+
+            <p>If you meet your quota, you win! If you over your quota, you lose!</p>
+        </div>
+        <div class="flex-item">
+            <button id="button-1"><img src="assets/images/planet02.png" alt="image of imaginary planet"></button>
+            <button id="button-2"><img src="assets/images/planet04.png" alt="image of imaginary planet"></button>
+        </div>
+        <div class="flex-item">
+            <button id="button-3"><img src="assets/images/planet05.png" alt="image of imaginary planet"></button>
+            <button id="button-4"><img src="assets/images/planet03.png" alt="image of imaginary planet"></button>
+        </div>
+        <div class="flex-item">
+            <div class="card">
+                <h2 class="card-header">Aetherium Quota</h2>
+                <div class="card-body">
+                    <h2 id="aetheriumQuota">123</h2>
+                </div>
+            </div>
+            <div class="card">
+                <h2 class="card-header">Aetherium Counter</h2>
+                <div class="card-body">
+                    <h2 id="aetheriumCounter">123</h2>
+                </div>
+            </div>
+            <div class="winslosses">
+                <h3>Wins: <span id="wins">123</span></h3>
+                <h3>Losses: <span id="losses">123</span></h3>
+            </div>
+        </div>
+
+
+
+        <script>
+            // create randomly generated target number and tie it to the aetherium quota id
+
+            var targetNumber = getRndInteger(19, 121)
+
+            function getRndInteger(min, max) {
+                return Math.floor(Math.random() * (max - min)) + min;
+            }
+
+            $("#aetheriumQuota").text(targetNumber);
+
+            // create a var called counter and tie it to the aetherium counter
+
+            // create an array of 4 filled with randomly generated numbers between 1 and 12??
+
+            // somehow assign those numbers from the array to the planet buttons???
+
+            // on click of the planet buttons the associated numbers will increment on the Aetherium Counter
+
+            // if the counter equals the quota then the player wins
+
+            // increment wins
+
+            // else increment losses
+
+            // restart game by clearing the quota, counter, and planet buttons
+        </script>
+
+
+        <!-- Pseudocode 
+    // Galaxy as a background image
+    // four planets as buttons
+    // spaceship as mouse pointer, if possible
+    // description of game
+    // player shown a random number that is their quota, number should be between 19 and 120
+    // each planet should have a random hidden value between 1 and 12
+    // when the player clicks on a planet, the numbers associated with those planets are added to their score/quota
+    // display the players score/quota when they click on a planet
+    // the player wins if their total score matches the quota displayed at the beginning of the game
+    // the player loses if their score goes above the quota
+    // the game restarts whenever the player wins or loses
+    // -->
+
+
+
+</body>
+
+</html>
