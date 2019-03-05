@@ -32,82 +32,105 @@
                 counter and don't go over the
                 quota! </p>
 
-            <p>If you meet your quota, you win! If you over your quota, you lose!</p>
+            <p>If you meet your quota, you win! If you go over your quota, you lose!</p>
         </div>
         <div class="flex-item">
-            <button id="button-1"><img src="assets/images/planet02.png" alt="image of imaginary planet"></button>
-            <button id="button-2"><img src="assets/images/planet04.png" alt="image of imaginary planet"></button>
+            <button class="planet-btn" id="button-1"><img src="assets/images/planet02.png" alt="image of imaginary planet"></button>
+            <button class="planet-btn" id="button-2"><img src="assets/images/planet04.png" alt="image of imaginary planet"></button>
         </div>
         <div class="flex-item">
-            <button id="button-3"><img src="assets/images/planet05.png" alt="image of imaginary planet"></button>
-            <button id="button-4"><img src="assets/images/planet03.png" alt="image of imaginary planet"></button>
+            <button class="planet-btn" id="button-3"><img src="assets/images/planet05.png" alt="image of imaginary planet"></button>
+            <button class="planet-btn" id="button-4"><img src="assets/images/planet03.png" alt="image of imaginary planet"></button>
         </div>
         <div class="flex-item">
             <div class="card">
                 <h2 class="card-header">Aetherium Quota</h2>
                 <div class="card-body">
-                    <h2 id="aetheriumQuota">123</h2>
+                    <h2 id="aetheriumQuota"></h2>
                 </div>
             </div>
             <div class="card">
                 <h2 class="card-header">Aetherium Counter</h2>
                 <div class="card-body">
-                    <h2 id="aetheriumCounter">123</h2>
+                    <h2 id="aetheriumCounter"></h2>
                 </div>
             </div>
             <div class="winslosses">
-                <h3>Wins: <span id="wins">123</span></h3>
-                <h3>Losses: <span id="losses">123</span></h3>
+                <h3>Wins: <span id="wins"></span></h3>
+                <h3>Losses: <span id="losses"></span></h3>
             </div>
         </div>
+    </div>
 
 
+    <script>
+        $(document).ready(function () {
 
-        <script>
             // create randomly generated target number and tie it to the aetherium quota id
-
-            var targetNumber = getRndInteger(19, 121)
+            var targetNumber = getRndInteger(19, 121);
 
             function getRndInteger(min, max) {
                 return Math.floor(Math.random() * (max - min)) + min;
             }
-
             $("#aetheriumQuota").text(targetNumber);
 
-            // create a var called counter and tie it to the aetherium counter
+            // create a var called counter and tie it to the aetherium counter"
+            var counter = 0
+            $("#aetheriumCounter").text(counter);
 
-            // create an array of 4 filled with randomly generated numbers between 1 and 12??
+            var wins = 0
+            $("#wins").text(wins);
 
-            // somehow assign those numbers from the array to the planet buttons???
+            var losses = 0
+            $("#losses").text(losses);
 
-            // on click of the planet buttons the associated numbers will increment on the Aetherium Counter
+            // assigning the planet buttons each a number from 1 through 12.
+            var planetButtons = {
+                "button-1": 0,
+                "button-2": 0,
+                "button-3": 0,
+                "button-4": 0,
+            }
 
-            // if the counter equals the quota then the player wins
+            $(".planet-btn").click(function () {
+                var id = $(this).attr("id");
+                counter = counter + planetButtons[id];
+                $("#aetheriumCounter").text(counter);
+                checkResult();
+            });
 
-            // increment wins
+            var assignedNums = [];
+            for (var planet in planetButtons) {
+                while (true) {
+                    var rand = getRndInteger(1, 13);
+                    if (assignedNums.indexOf(rand) < 0) {
+                        assignedNums.push(rand);
+                        planetButtons[planet] = rand;
+                        break;
+                    }
+                }
+            }
 
-            // else increment losses
+            function checkResult() {
 
-            // restart game by clearing the quota, counter, and planet buttons
-        </script>
-
-
-        <!-- Pseudocode 
-    // Galaxy as a background image
-    // four planets as buttons
-    // spaceship as mouse pointer, if possible
-    // description of game
-    // player shown a random number that is their quota, number should be between 19 and 120
-    // each planet should have a random hidden value between 1 and 12
-    // when the player clicks on a planet, the numbers associated with those planets are added to their score/quota
-    // display the players score/quota when they click on a planet
-    // the player wins if their total score matches the quota displayed at the beginning of the game
-    // the player loses if their score goes above the quota
-    // the game restarts whenever the player wins or loses
-    // -->
-
-
-
+                if (counter === targetNumber) {
+                    wins++;
+                    counter = 0;
+                    targetNumber = getRndInteger(19, 121);
+                    $("#wins").text(wins);
+                    $("#aetheriumQuota").text(targetNumber);
+                    $("#aetheriumCounter").text(counter);
+                } else if (counter > targetNumber) {
+                    losses++;
+                    counter = 0;
+                    targetNumber = getRndInteger(19, 121);
+                    $("#losses").text(losses);
+                    $("#aetheriumQuota").text(targetNumber);
+                    $("#aetheriumCounter").text(counter);
+                }
+            }
+        });
+    </script>
 </body>
 
 </html>
